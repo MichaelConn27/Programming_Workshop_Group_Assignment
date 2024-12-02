@@ -1,18 +1,18 @@
 import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class EventPlanner {
-    HashMap<String, ArrayList<String>> events;
+    HashMap<String, HashSet<String>> events;
 
     public EventPlanner() {
         events = new HashMap<>();
     }
 
     public void addEvent(String eventName) {
-        events.put(eventName, new ArrayList<>());
+        events.put(eventName, new HashSet<>());
     }
 
-    public void addEvent(String eventName, ArrayList<String> names) {
+    public void addEvent(String eventName, HashSet<String> names) {
         events.put(eventName, names);
     }
 
@@ -20,7 +20,7 @@ public class EventPlanner {
         events.get(eventName).add(name);
     }
 
-    public void addAtendeeList(ArrayList<String> names, String eventName) {
+    public void addAtendeeList(HashSet<String> names, String eventName) {
         events.get(eventName).addAll(names);
     }
 
