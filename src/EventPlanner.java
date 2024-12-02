@@ -24,6 +24,14 @@ public class EventPlanner {
         events.get(eventName).addAll(names);
     }
 
+    public void removeAtendee(String name, String eventName) {
+        try {
+            events.get(eventName).remove(name);
+        } catch (Exception e) {
+            System.out.println("name not found");
+        }
+    }
+
     public void fetchEventData(String eventName) {
         if (events.containsKey(eventName)) {
             System.out.println(events.get(eventName));

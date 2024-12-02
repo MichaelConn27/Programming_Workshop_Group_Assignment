@@ -26,6 +26,7 @@ public class Main {
             System.out.println("3. Add event");
             System.out.println("4. Add attendee to an event");
             System.out.println("5. Add multiple attendees to an event");
+            System.out.println("6. Remove attendee from an event");
             System.out.println("9. Quit");
             int command = sc.nextInt();
             sc = sc.reset();
@@ -44,6 +45,9 @@ public class Main {
                     break;
                 case 5:
                     addAtendees();
+                    break;
+                case 6:
+                    removeAttendee();
                     break;
                 case 9:
                     done = true;
@@ -78,6 +82,14 @@ public class Main {
         System.out.println("Enter the name to be added to the event: ");
         String attendee = new Scanner(System.in).nextLine();
         planner.addAtendee(attendee, eventName);
+    }
+
+    public static void removeAttendee() {
+        System.out.println("Enter event to remove attentee from: ");
+        String eventName = new Scanner(System.in).nextLine();
+        System.out.println("Enter the name to be removed from the event: ");
+        String attendee = new Scanner(System.in).nextLine();
+        planner.removeAtendee(attendee, eventName);
     }
 
     public static void addAtendees() {
