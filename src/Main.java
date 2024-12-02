@@ -1,22 +1,25 @@
 import java.util.Scanner;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Main {
 
     static EventPlanner planner = new EventPlanner();
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        planner.addEvent("2020 Fall Colloquium", new HashSet<String>());
-        planner.addEvent("2021 Fall Colloquium", new HashSet<String>());
-        planner.addAtendee("Louis", "2021 Fall Colloquium");
-        planner.addAtendee("Steve", "2021 Fall Colloquium");
-        planner.addAtendee("Joe", "2021 Fall Colloquium");
+        planner.addEvent("2020 Colloquium");
+        planner.addEvent("2021 Colloquium");
+        planner.addAtendee("Louis", "2021 Colloquium");
+        planner.addAtendee("Steve", "2021 Colloquium");
+        planner.addAtendee("Joe", "2021 Colloquium");
+        startCycle();
+        sc.close();
     }
 
-    public void startCycle() {
+    public static void startCycle() {
         boolean done = false;
         while (!done) {
+            sc = sc.reset();
             System.out.println("Choose a command by entering the corresponding number:");
             System.out.println("1. View events");
             System.out.println("2. View attendees for an event");
@@ -25,6 +28,7 @@ public class Main {
             System.out.println("5. Add multiple attendees to an event");
             System.out.println("9. Quit");
             int command = sc.nextInt();
+            sc = sc.reset();
             switch (command) {
                 case 1:
                     viewEvents();
@@ -47,41 +51,43 @@ public class Main {
         }
     }
 
-    public void viewEvents() {
+    public static void viewEvents() {
         for (String event : planner.events.keySet()) {
             System.out.println(event);
         }
     }
 
-    public void viewAttendees() {
-        System.out.println("Enter event to view attendees:");
-        String event = sc.nextLine();
-        planner.fetchEventData(event);
+    public static void viewAttendees() {
+        System.out.print("Enter event to view attendees: ");
+        String event = new Scanner(System.in).nextLine();
+        System.out.println(event);
+        planner.fetchEventData(event.trim());
+        planner.fetchEventData("2021 Colloquium");
     }
 
-    public void addEvent() {
+    public static void addEvent() {
         System.out.println("Enter event to add:");
-        String eventName = sc.nextLine();
+        String eventName = new Scanner(System.in).nextLine();
         planner.addEvent(eventName);
     }
 
-    public void addAtendee() {
+    public static void addAtendee() {
         System.out.println("Enter event to add attentees:");
-        String eventName = sc.nextLine();
+        String eventName = new Scanner(System.in).nextLine();
+        System.out.println(eventName);
         System.out.println("Enter the name to be added to the event: ");
-        String attendee = sc.nextLine();
-        planner.addAtendee(eventName, attendee);
-        sc.close();
+        String attendee = new Scanner(System.in).nextLine();
+        planner.addAtendee(attendee, eventName);
     }
 
-    public void addAtendees() {
+    public static void addAtendees() {
         System.out.println("Enter event to add attentees:");
-        String eventName = sc.nextLine();
+        String eventName = new Scanner(System.in).nextLine();
         boolean con = true;
-        HashSet<String> list = new HashSet<>();
+        ArrayList<String> list = new ArrayList<>();
         while (con) {
             System.out.println("Enter a name to be added to the event. If done entering names, input 'exit' to exit: ");
-            String attendee = sc.nextLine();
+            String attendee = new Scanner(System.in).nextLine();
             if (attendee.equals("exit")) {
                 con = false;
             } else {
