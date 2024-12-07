@@ -1,11 +1,16 @@
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.ArrayList;
 
 public class EventPlanner {
-    HashMap<String, ArrayList<String>> events;
+    private final HashMap<String, ArrayList<String>> events;
 
     public EventPlanner() {
         events = new HashMap<>();
+    }
+
+    public Collection<String> getKeySet(){
+        return events.keySet();
     }
 
     public void addEvent(String eventName) {
